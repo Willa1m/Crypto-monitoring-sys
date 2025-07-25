@@ -21,11 +21,12 @@ wheels/
 *.egg
 MANIFEST
 
-# Virtual Environment
-.venv/
+# Virtual environments
 venv/
-ENV/
 env/
+ENV/
+.venv/
+.env/
 
 # IDE
 .vscode/
@@ -40,12 +41,17 @@ logs/
 
 # Database
 *.db
+*.sqlite
 *.sqlite3
 
-# Configuration files with sensitive data
-config.ini
+# 敏感配置文件
 .env
+config.ini
+secrets.json
 *.key
+*.pem
+*.p12
+*.pfx
 
 # OS generated files
 .DS_Store
@@ -59,14 +65,32 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+temp/
+tmp/
 
-# Redis dump
+# Redis
 dump.rdb
 
 # Cloudflare
+cloudflared
 cloudflared.exe
 
-# Output files
+# 输出文件
 output/
-static/charts/*.png
-static/charts/*.json
+static/output/
+
+# 备份文件
+*.bak
+*.backup
+
+# API密钥和令牌
+*token*
+*secret*
+*password*
+*key*
+auth.json
+credentials.json
+
+# 测试输出
+test_output/
+test_results/

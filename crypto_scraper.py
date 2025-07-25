@@ -37,7 +37,7 @@ CRYPTOCURRENCIES = {
 }
 
 # API配置
-API_KEY = '6c2b58bddb3f3034bf717c67253b0e23cfe7472e35dd060edcbda20d169996d6'
+API_KEY = 'YOUR_API_KEY_HERE'  # 请在此处填入你的CoinDesk API密钥
 COINDESK_API_BASE_URL = "https://data-api.coindesk.com/index/cc/v1"
 COINDESK_API_ENDPOINTS = {
     'current': '/latest/tick',
