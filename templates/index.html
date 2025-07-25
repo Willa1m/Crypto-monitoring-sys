@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加密货币价格监控系统 - 首页</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 导航菜单 -->
+        <div class="nav-menu">
+            <a href="/" class="nav-item active">首页</a>
+            <a href="/bitcoin" class="nav-item">
+                <img src="/static/icons/bitcoin.svg" alt="Bitcoin" class="crypto-icon">
+                比特币详情
+            </a>
+            <a href="/ethereum" class="nav-item">
+                <img src="/static/icons/ethereum.svg" alt="Ethereum" class="crypto-icon">
+                以太坊详情
+            </a>
+            <a href="/kline" class="nav-item">
+                📊 K线图分析
+            </a>
+        </div>
+        
+        <div class="header">
+            <h1>🚀 加密货币价格监控系统</h1>
+            <p>实时监控比特币和以太坊价格走势</p>
+        </div>
+
+        <div class="dashboard">
+            <div class="price-panel">
+                <h2>💰 实时价格</h2>
+                <div id="priceList">
+                </div>
+                <div id="chartStatsContainer" class="chart-stats-container">
+                    <div class="stats-title">当前选择加密货币统计</div>
+                    <div id="chartStats" class="chart-stats">
+                        <div class="stats-item">
+                            <span class="stats-label">当前价格:</span>
+                            <span class="stats-value">--</span>
+                        </div>
+                        <div class="stats-item">
+                            <span class="stats-label">平均价格:</span>
+                            <span class="stats-value">--</span>
+                        </div>
+                        <div class="stats-item">
+                            <span class="stats-label">趋势:</span>
+                            <span class="stats-value">--</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="refresh-btn" onclick="refreshData()">🔄 刷新数据</button>
+            </div>
+
+            <div class="chart-panel">
+                <div class="chart-controls">
+                    <h2>📈 价格走势</h2>
+                    <div class="controls-container">
+                        <div class="crypto-buttons">
+                            <button class="crypto-btn active" onclick="changeCrypto('BTC')">
+                                <img src="/static/icons/bitcoin.svg" alt="Bitcoin" class="crypto-icon">
+                                BTC
+                            </button>
+                            <button class="crypto-btn" onclick="changeCrypto('ETH')">
+                                <img src="/static/icons/ethereum.svg" alt="Ethereum" class="crypto-icon">
+                                ETH
+                            </button>
+                        </div>
+                        <div class="timeframe-buttons">
+                            <button class="timeframe-btn" onclick="changeTimeframe('minute')">分钟</button>
+                            <button class="timeframe-btn active" onclick="changeTimeframe('hour')">小时</button>
+                            <button class="timeframe-btn" onclick="changeTimeframe('day')">天</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container" id="chartContainer">
+                    <canvas id="priceChart"></canvas>
+                    <div class="loading" id="chartLoading" style="display: none;">正在加载图表数据...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-item">
+                <div class="status-indicator" id="statusIndicator"></div>
+                <span id="statusText">系统运行正常</span>
+            </div>
+            <div class="status-item">
+                <span>最后更新: <span id="lastUpdate">--</span></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src="/static/js/crypto.js"></script>
+</body>
+</html>
