@@ -360,8 +360,27 @@ python cloudflare_tunnel.py
 - 提交 GitHub Issue
 - 发送邮件至项目维护者
 
-## 🌟 项目维护者
-
-- [Willa1m](mailto: tu760979288@gmail.com)
+---
 
 **感谢使用加密货币价格监控系统！** 🚀
+- **后端**: Python, Flask
+- **数据库**: MySQL/MariaDB
+- **数据处理**: Pandas, NumPy
+- **图表生成**: Matplotlib
+- **前端**: HTML5, CSS3, JavaScript, Chart.js
+- **任务调度**: Schedule
+- **API**: CoinDesk API
+
+## 许可证
+
+本项目仅供学习和研究使用。
+
+## 联系方式
+
+如有问题或建议，请通过以下方式联系：
+- 项目仓库: [GitHub链接]
+- 邮箱: [联系邮箱]
+
+---
+
+**注意**: 请确保在生产环境中使用时，妥善保护API密钥和数据库凭据。
