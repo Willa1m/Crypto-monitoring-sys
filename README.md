@@ -360,6 +360,8 @@ python cloudflare_tunnel.py
 - 提交 GitHub Issue
 - 发送邮件至项目维护者
 
----
+## 🌟 项目维护者
+
+- [Willa1m](mailto: tu760979288@gmail.com)
 
 **感谢使用加密货币价格监控系统！** 🚀
