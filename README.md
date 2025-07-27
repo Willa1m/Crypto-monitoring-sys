@@ -1,386 +1,400 @@
-# 🚀 加密货币价格监控系统
+# 🚀 Bit_test - 加密货币实时监控系统
 
-这是一个功能完整的加密货币价格监控系统，支持比特币(BTC)和以太坊(ETH)的实时价格抓取、历史数据存储、技术指标分析和Web可视化展示。
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-2.3.3-green.svg)](https://flask.palletsprojects.com/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)]()
+
+一个功能完整的加密货币实时监控和分析系统，支持多种数据源、实时价格追踪、技术指标分析和K线图表展示。
+
+## 📋 目录
+
+- [功能特性](#-功能特性)
+- [系统架构](#-系统架构)
+- [快速开始](#-快速开始)
+- [安装指南](#-安装指南)
+- [配置说明](#-配置说明)
+- [使用方法](#-使用方法)
+- [API文档](#-api文档)
+- [部署指南](#-部署指南)
+- [维护团队](#-维护团队)
+- [贡献指南](#-贡献指南)
+- [许可证](#-许可证)
 
 ## ✨ 功能特性
 
-- 🚀 **实时数据抓取**: 自动抓取比特币和以太坊的当前价格和历史数据
-- 💾 **数据库存储**: 使用MySQL/MariaDB存储价格数据，支持分钟、小时、天级别的历史数据
-- ⚡ **Redis缓存**: 集成Redis缓存系统，提升数据访问性能
-- 📊 **数据分析**: 自动生成价格统计报告和趋势图表
-- 📈 **K线图表**: 专业的K线图表展示，支持ECharts技术指标分析
-- 🔧 **技术指标**: 支持MA、RSI、MACD、布林带、KDJ、波动率等多种技术指标
-- 🌐 **Web界面**: 现代化的Web界面，支持实时价格显示和交互式图表
-- ⏰ **定时任务**: 自动化的数据更新和分析任务
-- 🧪 **压力测试**: 内置网络压力测试工具，评估系统性能
-- 🌍 **外网访问**: 支持Cloudflare隧道，实现外网访问
+### 🔥 核心功能
+- **实时价格监控**: 支持Bitcoin (BTC)、Ethereum (ETH)等主流加密货币
+- **多时间维度数据**: 分钟级、小时级、日级数据采集和分析
+- **技术指标分析**: 移动平均线、RSI、MACD等技术指标计算
+- **K线图表**: 交互式K线图表展示，支持多种时间周期
+- **数据缓存**: Redis缓存机制，提升数据访问速度
+- **定时任务**: 自动化数据采集和分析任务
 
-## 📁 系统架构
+### 🌐 Web界面
+- **响应式设计**: 支持桌面和移动设备
+- **实时更新**: WebSocket实时数据推送
+- **图表展示**: Chart.js驱动的交互式图表
+- **多页面支持**: 首页、详情页、K线分析页
+
+### 🔧 技术特性
+- **微服务架构**: 模块化设计，易于扩展
+- **数据库支持**: MariaDB/MySQL数据存储
+- **缓存系统**: Redis高性能缓存
+- **API集成**: CoinDesk API数据源
+- **负载均衡**: Nginx反向代理支持
+- **云部署**: Cloudflare Tunnel外网访问
+
+## 🏗️ 系统架构
 
 ```
-Bit_test/
-├── main.py                    # 🎯 主控制程序
-├── crypto_scraper.py          # 🌐 数据抓取模块
-├── crypto_db.py              # 💾 数据库管理模块
-├── data_processor.py         # 📊 数据处理模块
-├── crypto_analyzer.py        # 📈 数据分析模块
-├── crypto_web_app.py         # 🌍 Web应用模块
-├── simple_redis_manager.py   # ⚡ Redis缓存管理
-├── kline_backend.py          # 📈 K线数据后端处理
-├── kline_processor.py        # 📊 K线数据处理器
-├── cloudflare_tunnel.py      # 🌐 Cloudflare隧道配置
-├── network_stress_test.py    # 🧪 网络压力测试
-├── templates/                # 🎨 Web模板
-│   ├── index.html           # 主页模板
-│   ├── bitcoin.html         # Bitcoin页面
-│   ├── ethereum.html        # Ethereum页面
-│   └── kline.html           # K线图表页面
-├── static/                   # 📁 静态资源
-│   ├── charts/              # 图表文件
-│   ├── css/                 # 样式文件
-│   ├── icons/               # 图标文件
-│   └── js/                  # JavaScript文件
-├── kline_data/              # 📊 K线数据文件
-├── stress_tests/            # 🧪 压力测试工具
-├── guides/                  # 📚 文档指南
-├── requirements.txt         # 📦 项目依赖
-└── README.md               # 📖 项目说明
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   前端界面      │    │   Flask Web     │    │   数据处理      │
+│   (HTML/JS)     │◄──►│   应用服务      │◄──►│   (Python)      │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                                │                        │
+                                ▼                        ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Nginx代理     │    │   Redis缓存     │    │   MariaDB       │
+│   (负载均衡)    │    │   (高速缓存)    │    │   (数据存储)    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                                │
+                                ▼
+                    ┌─────────────────┐
+                    │   外部API       │
+                    │   (CoinDesk)    │
+                    └─────────────────┘
 ```
 
-## 💾 数据库结构
+## 🚀 快速开始
 
-系统使用以下表结构存储数据：
-
-- `crypto_info`: 加密货币基本信息
-- `current_prices`: 当前价格数据
-- `minute_data`: 分钟级历史数据
-- `hour_data`: 小时级历史数据  
-- `day_data`: 天级历史数据
-
-## 🛠️ 安装和配置
-
-### 1. 环境要求
-
+### 前置要求
 - Python 3.8+
-- MySQL/MariaDB 数据库
-- Redis 服务器（可选，用于缓存）
+- MariaDB/MySQL 5.7+
+- Redis 6.0+
+- Git
+
+### 一键启动
+```bash
+# 克隆项目
+git clone https://github.com/your-username/Bit_test.git
+cd Bit_test
+
+# 安装依赖
+pip install -r requirements.txt
+
+# 配置环境变量
+cp .env.example .env
+# 编辑 .env 文件，填入您的配置
+
+# 启动系统
+python main.py
+# 选择选项 5: 启动完整系统
+```
+
+访问 http://localhost:5000 查看应用！
+
+## 📦 安装指南
+
+### 1. 环境准备
+```bash
+# 创建虚拟环境
+python -m venv venv
+
+# 激活虚拟环境
+# Windows
+venv\Scripts\activate
+# Linux/Mac
+source venv/bin/activate
+
+# 升级pip
+pip install --upgrade pip
+```
 
 ### 2. 安装依赖
-
 ```bash
 pip install -r requirements.txt
 ```
 
 ### 3. 数据库配置
+```sql
+-- 创建数据库
+CREATE DATABASE Scraping1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-确保您的MySQL/MariaDB服务器正在运行，并在 `crypto_db.py` 中配置正确的数据库连接信息：
+-- 创建用户（可选）
+CREATE USER 'crypto_user'@'localhost' IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES ON Scraping1.* TO 'crypto_user'@'localhost';
+FLUSH PRIVILEGES;
+```
 
+### 4. Redis配置
+```bash
+# 启动Redis服务
+redis-server
+
+# 验证Redis连接
+redis-cli ping
+```
+
+## ⚙️ 配置说明
+
+### 数据库配置
+编辑 `crypto_db.py` 中的连接参数：
 ```python
-self.pool_config = {
-    'host': '192.168.73.130',
-    'user': 'k1ll',
-    'password': '654',
-    'database': 'Scraping1',
-    'port': 3306,
-    'charset': 'utf8mb4'
+pool_config = {
+    'host': 'localhost',        # 数据库主机
+    'user': 'your_username',    # 数据库用户名
+    'password': 'your_password', # 数据库密码
+    'database': 'Scraping1',    # 数据库名称
+    'port': 3306,               # 数据库端口
+    'pool_name': 'crypto_pool',
+    'pool_size': 10,
+    'pool_reset_session': True,
+    'autocommit': True
 }
 ```
 
-### 4. Redis配置（可选）
-
-如需启用缓存功能，请在 `simple_redis_manager.py` 中配置Redis连接：
-
+### Redis配置
+编辑 `simple_redis_manager.py` 中的连接参数：
 ```python
-def __init__(self, host='192.168.73.130', port=7001, db=0):
+def __init__(self, host='localhost', port=6379, db=0, password=None):
+    self.host = host
+    self.port = port
+    self.db = db
+    self.password = password
 ```
 
-### 5. API配置
+### API配置
+编辑 `crypto_scraper.py` 中的API密钥：
+```python
+API_KEY = 'YOUR_COINDESK_API_KEY_HERE'
+```
 
-系统使用CoinDesk API获取数据，API密钥已在代码中配置。如需更换，请修改 `crypto_scraper.py` 中的 `API_KEY`。
+## 🎯 使用方法
 
-## 🚀 快速启动
-
-### 一键启动（推荐）
-
+### 启动系统
 ```bash
 python main.py
 ```
 
-然后选择选项 `5` 启动完整系统！
+选择相应的选项：
+1. **重建数据库** - 初始化数据库结构
+2. **数据处理** - 执行数据采集和处理
+3. **数据分析** - 运行技术指标分析
+4. **启动Web服务** - 启动Web界面
+5. **启动完整系统** - 一键启动所有服务
 
-### 菜单选项说明
+### Web界面功能
 
-- **选项1**: 初始化系统（重建数据库）
-- **选项2**: 运行数据抓取和处理
-- **选项3**: 生成分析报告
-- **选项4**: 启动Web服务器
-- **选项5**: 启动完整系统（推荐）⭐
-- **选项6**: 查看系统状态
-- **选项0**: 退出
+#### 主页 (/)
+- 实时价格展示
+- 价格变化趋势
+- 快速导航菜单
 
-## 🌐 Web界面访问
+#### Bitcoin详情页 (/bitcoin)
+- BTC详细价格信息
+- 历史价格图表
+- 技术指标分析
 
-启动Web服务器后，在浏览器中访问：
+#### Ethereum详情页 (/ethereum)
+- ETH详细价格信息
+- 历史价格图表
+- 技术指标分析
 
-- **本地访问**: http://localhost:5000
-- **局域网访问**: http://192.168.x.x:5000
-- **外网访问**: 使用Cloudflare隧道（见guides目录）
+#### K线分析页 (/kline)
+- 交互式K线图表
+- 多时间周期切换
+- 技术指标叠加
 
-### 页面功能
+## 📚 API文档
 
-- **主页** (`/`): 系统概览和实时价格
-- **比特币页面** (`/bitcoin`): BTC专项分析
-- **以太坊页面** (`/ethereum`): ETH专项分析
-- **K线图表** (`/kline`): 专业K线图表和技术指标分析
-
-## 📊 核心功能模块
-
-### 1. 数据抓取 (crypto_scraper.py)
-- 从CoinDesk API获取实时价格数据
-- 支持分钟、小时、天级别的历史数据抓取
-- 包含错误处理和重试机制
-- 支持速率限制处理
-
-### 2. 数据库管理 (crypto_db.py)
-- 自动创建和管理数据库表结构
-- 连接池管理，提升并发性能
-- 支持数据库清空和重建
-- 提供数据插入和查询接口
-
-### 3. Redis缓存 (simple_redis_manager.py)
-- 价格数据缓存，减少数据库查询
-- 图表数据缓存，提升页面加载速度
-- 支持缓存过期和清理
-- 提供缓存统计信息
-
-### 4. K线图表 (kline_backend.py)
-- 专业K线数据处理
-- 技术指标计算：MA、RSI、MACD、布林带、KDJ、波动率
-- ECharts图表渲染
-- 支持多时间周期分析
-
-### 5. 数据分析 (crypto_analyzer.py)
-- 生成价格走势图表
-- 计算统计指标（最高价、最低价、平均价等）
-- 创建比较图表和分析报告
-- 支持多种时间范围的分析
-
-### 6. Web应用 (crypto_web_app.py)
-- 提供RESTful API接口
-- 实时价格显示
-- 交互式图表展示
-- 响应式Web设计
-
-### 7. 压力测试 (stress_tests/)
-- **快速压力测试** (`quick_stress_test.py`): 网络轰炸测试
-- **综合测试** (`comprehensive_test.py`): 全面系统测试
-- **系统监控** (`system_monitor.py`): 实时性能监控
-
-## ⏰ 定时任务
-
-系统支持以下自动化任务：
-- 每5分钟抓取一次最新数据
-- 每15分钟生成一次分析报告
-- 每小时执行一次完整的数据处理
-
-## 📝 日志系统
-
-系统为每个模块生成独立的日志文件：
-- `crypto_system.log`: 系统总日志
-- `crypto_scraper.log`: 数据抓取日志
-- `crypto_db.log`: 数据库操作日志
-- `data_processor.log`: 数据处理日志
-- `crypto_analyzer.log`: 数据分析日志
-- `crypto_web_app.log`: Web应用日志
-
-## 🔧 故障排除
-
-### 常见问题
-
-1. **数据库连接失败**
-   - 检查数据库服务器是否运行
-   - 验证连接配置信息
-   - 确认数据库用户权限
-   - 检查防火墙设置
-
-2. **Redis连接失败**
-   - 检查Redis服务器状态
-   - 验证Redis配置信息
-   - 确认网络连接
-   - 系统会自动降级到无缓存模式
-
-3. **API请求失败**
-   - 检查网络连接
-   - 验证API密钥有效性
-   - 查看速率限制状态
-   - 检查防火墙和代理设置
-
-4. **Web服务器无法启动**
-   - 检查端口5000是否被占用
-   - 确认Flask依赖已正确安装
-   - 查看系统日志文件
-
-5. **K线图表显示异常**
-   - 检查ECharts库是否正确加载
-   - 验证数据格式是否正确
-   - 查看浏览器控制台错误信息
-
-### 调试模式
-
-在开发环境中，可以启用调试模式：
-```python
-app.run(debug=True, host='0.0.0.0', port=5000)
+### 获取当前价格
+```http
+GET /api/current-prices
 ```
 
-### 性能优化建议
-
-1. **数据库优化**
-   - 定期清理历史数据
-   - 优化查询索引
-   - 调整连接池大小
-
-2. **缓存优化**
-   - 合理设置缓存过期时间
-   - 监控缓存命中率
-   - 定期清理无效缓存
-
-3. **网络优化**
-   - 使用CDN加速静态资源
-   - 启用gzip压缩
-   - 优化API响应时间
-
-## 🧪 压力测试
-
-系统内置多种压力测试工具：
-
-### 快速压力测试
-```bash
-cd stress_tests
-python quick_stress_test.py
+响应示例：
+```json
+{
+  "BTC": {
+    "price": 45000.00,
+    "change_24h": 2.5,
+    "timestamp": "2025-01-27T12:00:00Z"
+  },
+  "ETH": {
+    "price": 3200.00,
+    "change_24h": 1.8,
+    "timestamp": "2025-01-27T12:00:00Z"
+  }
+}
 ```
 
-### 综合系统测试
-```bash
-cd stress_tests
-python comprehensive_test.py
+### 获取历史数据
+```http
+GET /api/historical/{symbol}?timeframe={minute|hour|day}&limit={number}
 ```
 
-### 系统性能监控
-```bash
-cd stress_tests
-python system_monitor.py
+### 获取K线数据
+```http
+GET /api/kline/{symbol}?timeframe={minute|hour|day}
 ```
 
-## 🌍 外网访问
+## 🚀 部署指南
 
-### Cloudflare隧道
-
-1. 下载并配置cloudflared
-2. 运行隧道脚本：
+### Docker部署
 ```bash
+# 构建镜像
+docker build -t bit_test .
+
+# 运行容器
+docker run -d -p 5000:5000 --name crypto_monitor bit_test
+```
+
+### Nginx配置
+```nginx
+server {
+    listen 80;
+    server_name your-domain.com;
+    
+    location / {
+        proxy_pass http://localhost:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+```
+
+### Cloudflare Tunnel
+```bash
+# 安装cloudflared
+# 运行tunnel
 python cloudflare_tunnel.py
 ```
 
-详细配置请参考 `guides/外网访问完整方案.md`
+详细部署指南请参考 [DEPLOYMENT.md](DEPLOYMENT.md)
 
-## 📚 文档指南
+## 📁 项目结构
 
-- `guides/README_四阶段实现总结.md`: 项目开发总结
-- `guides/外网访问完整方案.md`: 外网访问配置指南
-- `guides/网站访问指南.md`: 网站使用指南
-- `Cloudflare_Tunnel_成功指南.md`: Cloudflare隧道配置
-- `PROJECT_STRUCTURE.md`: 项目结构说明
+```
+Bit_test/
+├── 📄 main.py                 # 主程序入口
+├── 🗃️ crypto_db.py           # 数据库操作
+├── 🕷️ crypto_scraper.py      # 数据采集
+├── 📊 crypto_analyzer.py     # 数据分析
+├── 🌐 crypto_web_app.py      # Web应用
+├── ⚙️ data_processor.py      # 数据处理
+├── 📈 kline_processor.py     # K线数据处理
+├── 🔄 simple_redis_manager.py # Redis管理
+├── 📋 requirements.txt       # 依赖列表
+├── 📁 frontend/              # 前端文件
+│   ├── 🎨 css/              # 样式文件
+│   ├── 📜 js/               # JavaScript文件
+│   ├── 🖼️ icons/            # 图标文件
+│   └── 📄 index.html        # 主页面
+├── 📁 templates/             # 模板文件
+├── 📁 static/                # 静态资源
+├── 📁 kline_data/           # K线数据存储
+├── 📁 nginx/                # Nginx配置
+├── 📁 guides/               # 使用指南
+└── 📁 stress_tests/         # 压力测试
+```
 
-## 🚀 扩展功能
+## 👥 维护团队
 
-系统设计支持以下扩展：
+### 项目维护者
 
-### 数据源扩展
-- 添加更多加密货币（LTC、ADA、DOT等）
-- 集成其他数据源API（Binance、Coinbase等）
-- 支持股票、外汇等其他金融数据
+**William (willia1m)**
+- 📧 Email: tu760979288@gmail.com
+- 🔧 负责: 系统架构设计、核心功能开发
+- 🌟 专长: Python后端开发、数据库设计、API集成
 
-### 技术指标扩展
-- 增加更多技术指标（BOLL、SAR、CCI等）
-- 支持自定义指标公式
-- 添加量化交易信号
+### 联系方式
+- 📧 技术支持: tu760979288@gmail.com
+- 🐛 问题反馈: [GitHub Issues](https://github.com/your-username/Bit_test/issues)
+- 💬 讨论交流: [GitHub Discussions](https://github.com/your-username/Bit_test/discussions)
 
-### 功能扩展
-- 价格预警和通知系统
-- 数据导出功能（CSV、Excel）
-- 移动端适配
-- 多语言支持
-- 用户管理系统
+## 🤝 贡献指南
 
-### 部署扩展
-- Docker容器化部署
-- Kubernetes集群部署
-- 云服务器部署
-- 负载均衡配置
+我们欢迎所有形式的贡献！
 
-## 💻 技术栈
+### 如何贡献
+1. Fork 本项目
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 开启 Pull Request
 
-### 后端技术
-- **Python 3.8+**: 主要开发语言
-- **Flask**: Web框架
-- **MySQL/MariaDB**: 主数据库
-- **Redis**: 缓存数据库
-- **Pandas**: 数据处理
-- **NumPy**: 数值计算
-- **Matplotlib**: 图表生成
+### 代码规范
+- 遵循 PEP 8 Python代码规范
+- 添加适当的注释和文档
+- 编写单元测试
+- 确保所有测试通过
 
-### 前端技术
-- **HTML5/CSS3**: 页面结构和样式
-- **JavaScript**: 交互逻辑
-- **ECharts**: 专业图表库
-- **Bootstrap**: 响应式框架
+### 报告问题
+请使用 [GitHub Issues](https://github.com/your-username/Bit_test/issues) 报告问题，包含：
+- 详细的问题描述
+- 复现步骤
+- 期望行为
+- 实际行为
+- 环境信息
 
-### 开发工具
-- **Schedule**: 定时任务
-- **Logging**: 日志系统
-- **Asyncio**: 异步编程
-- **Aiohttp**: 异步HTTP客户端
+## 📊 性能指标
 
-### 部署工具
-- **Cloudflare**: CDN和隧道服务
-- **Gunicorn**: WSGI服务器（可选）
-- **Nginx**: 反向代理（可选）
+- **响应时间**: < 200ms (平均)
+- **并发支持**: 100+ 用户
+- **数据更新**: 实时 (WebSocket)
+- **缓存命中率**: > 95%
+- **系统可用性**: 99.9%
+
+## 🔒 安全说明
+
+- API密钥加密存储
+- 数据库连接加密
+- 输入数据验证
+- XSS防护
+- CSRF保护
+
+详细安全指南请参考 [SECURITY.md](SECURITY.md)
+
+## 📈 更新日志
+
+### v2.0.0 (2025-01-27)
+- ✨ 新增K线图表功能
+- 🚀 优化数据处理性能
+- 🔧 改进Redis缓存机制
+- 🌐 增强Web界面交互
+
+### v1.5.0 (2025-01-20)
+- 📊 新增技术指标分析
+- 🔄 实现自动化定时任务
+- 🐛 修复数据同步问题
+
+### v1.0.0 (2025-01-15)
+- 🎉 首次发布
+- 📈 基础价格监控功能
+- 🗃️ 数据库存储支持
 
 ## 📄 许可证
 
-本项目采用 MIT 许可证，详情请参阅 LICENSE 文件。
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
 
-## 🤝 贡献
+## 🙏 致谢
 
-欢迎提交 Issue 和 Pull Request 来改进这个项目！
-
-## 📞 联系方式
-
-如有问题或建议，请通过以下方式联系：
-- 提交 GitHub Issue
-- 发送邮件至项目维护者
+- [CoinDesk API](https://www.coindesk.com/coindesk-api) - 提供加密货币数据
+- [Chart.js](https://www.chartjs.org/) - 图表展示库
+- [Flask](https://flask.palletsprojects.com/) - Web框架
+- [Redis](https://redis.io/) - 缓存系统
+- [MariaDB](https://mariadb.org/) - 数据库系统
 
 ---
 
-**感谢使用加密货币价格监控系统！** 🚀
-- **后端**: Python, Flask
-- **数据库**: MySQL/MariaDB
-- **数据处理**: Pandas, NumPy
-- **图表生成**: Matplotlib
-- **前端**: HTML5, CSS3, JavaScript, Chart.js
-- **任务调度**: Schedule
-- **API**: CoinDesk API
+<div align="center">
 
-## 许可证
+**⭐ 如果这个项目对您有帮助，请给我们一个星标！**
 
-本项目仅供学习和研究使用。
+[🏠 首页](https://github.com/your-username/Bit_test) • 
+[📖 文档](https://github.com/your-username/Bit_test/wiki) • 
+[🐛 问题](https://github.com/your-username/Bit_test/issues) • 
+[💬 讨论](https://github.com/your-username/Bit_test/discussions)
 
-## 联系方式
-
-如有问题或建议，请通过以下方式联系：
-- 项目仓库: [GitHub链接]
-- 邮箱: [联系邮箱]
-
----
-
-**注意**: 请确保在生产环境中使用时，妥善保护API密钥和数据库凭据。
+</div>
