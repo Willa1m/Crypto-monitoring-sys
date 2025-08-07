@@ -1,0 +1,96 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# 敏感配置文件
+.env
+config.ini
+secrets.json
+*.key
+*.pem
+*.p12
+*.pfx
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Redis
+dump.rdb
+
+# Cloudflare
+cloudflared
+cloudflared.exe
+
+# 输出文件
+output/
+static/output/
+
+# 备份文件
+*.bak
+*.backup
+
+# API密钥和令牌
+*token*
+*secret*
+*password*
+*key*
+auth.json
+credentials.json
+
+# 测试输出
+test_output/
+test_results/

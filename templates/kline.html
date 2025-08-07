@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K线图分析 - 加密货币监控系统</title>
+    <link rel="stylesheet" href="/static/css/kline.css">
+</head>
+<body>
+    <div class="kline-container">
+        <!-- 导航菜单 -->
+        <div class="nav-menu">
+            <a href="/" class="nav-item">首页</a>
+            <a href="/bitcoin" class="nav-item">
+                <img src="/static/icons/bitcoin.svg" alt="Bitcoin" class="crypto-icon">
+                比特币详情
+            </a>
+            <a href="/ethereum" class="nav-item">
+                <img src="/static/icons/ethereum.svg" alt="Ethereum" class="crypto-icon">
+                以太坊详情
+            </a>
+            <a href="/kline" class="nav-item active">📊 K线图分析</a>
+        </div>
+
+        <!-- 头部 -->
+        <div class="kline-header">
+            <h1 class="kline-title">📊 K线图技术分析</h1>
+            <button class="refresh-btn" onclick="refreshKlineData()">🔄 刷新数据</button>
+        </div>
+
+        <!-- 控制面板 -->
+        <div class="control-panel">
+            <div class="crypto-selector">
+                <label>加密货币:</label>
+                <button class="crypto-btn active" onclick="switchCrypto('BTC')">BTC</button>
+                <button class="crypto-btn" onclick="switchCrypto('ETH')">ETH</button>
+            </div>
+            <div class="timeframe-selector">
+                <label>时间周期:</label>
+                <button class="timeframe-btn" onclick="switchTimeframe('minute')">1分钟</button>
+                <button class="timeframe-btn active" onclick="switchTimeframe('hour')">1小时</button>
+                <button class="timeframe-btn" onclick="switchTimeframe('day')">1天</button>
+            </div>
+        </div>
+
+        <!-- 价格信息面板 -->
+        <div class="price-info-panel">
+            <div class="price-info-item">
+                <span class="price-info-label">当前价格</span>
+                <span class="price-info-value" id="currentPrice">--</span>
+            </div>
+            <div class="price-info-item">
+                <span class="price-info-label">开盘价</span>
+                <span class="price-info-value" id="openPrice">--</span>
+            </div>
+            <div class="price-info-item">
+                <span class="price-info-label">最高价</span>
+                <span class="price-info-value" id="highPrice">--</span>
+            </div>
+            <div class="price-info-item">
+                <span class="price-info-label">最低价</span>
+                <span class="price-info-value" id="lowPrice">--</span>
+            </div>
+            <div class="price-info-item">
+                <span class="price-info-label">成交量</span>
+                <span class="price-info-value" id="volume">--</span>
+            </div>
+            <div class="price-info-item">
+                <span class="price-info-label">24h涨跌</span>
+                <span class="price-info-value" id="change24h">--</span>
+            </div>
+        </div>
+
+        <!-- 主图表容器 -->
+        <div class="charts-container">
+            <!-- 工具栏 -->
+            <div class="chart-toolbar">
+                <div class="chart-tools">
+                    <button class="tool-btn" onclick="toggleFullscreen()">📺 全屏</button>
+                    <button class="tool-btn" onclick="downloadChart()">💾 下载</button>
+                    <button class="tool-btn" onclick="resetZoom()">🔍 重置缩放</button>
+                </div>
+                <div class="chart-info">
+                    <span id="chartSymbol">BTC/USDT</span> • <span id="chartTimeframe">1小时</span>
+                </div>
+            </div>
+
+            <!-- K线图主图 -->
+            <div class="main-chart-container">
+                <div id="klineChart" style="width: 100%; height: 400px;"></div>
+                <div class="loading" id="klineLoading" style="display: none;">正在加载K线数据...</div>
+            </div>
+
+            <!-- RSI指标图 -->
+            <div class="indicator-chart-container">
+                <div id="rsiChart" style="width: 100%; height: 150px;"></div>
+            </div>
+
+            <!-- MACD指标图 -->
+            <div class="indicator-chart-container">
+                <div id="macdChart" style="width: 100%; height: 150px;"></div>
+            </div>
+        </div>
+
+        <!-- 技术指标面板 -->
+        <div class="indicators-panel">
+            <h3>📈 技术指标</h3>
+            <div class="indicators-grid">
+                <div class="indicator-item">
+                    <span class="indicator-label">MA5</span>
+                    <span class="indicator-value" id="ma5">--</span>
+                </div>
+                <div class="indicator-item">
+                    <span class="indicator-label">MA10</span>
+                    <span class="indicator-value" id="ma10">--</span>
+                </div>
+                <div class="indicator-item">
+                    <span class="indicator-label">MA20</span>
+                    <span class="indicator-value" id="ma20">--</span>
+                </div>
+                <div class="indicator-item">
+                    <span class="indicator-label">RSI</span>
+                    <span class="indicator-value" id="rsi">--</span>
+                </div>
+                <div class="indicator-item">
+                    <span class="indicator-label">MACD</span>
+                    <span class="indicator-value" id="macd">--</span>
+                </div>
+                <div class="indicator-item">
+                    <span class="indicator-label">波动率</span>
+                    <span class="indicator-value" id="volatility">--</span>
+                </div>
+                <div class="indicator-item">
+                    <span class="indicator-label">布林上轨</span>
+                    <span class="indicator-value" id="bollingerUpper">--</span>
+                </div>
+                <div class="indicator-item">
+                    <span class="indicator-label">布林下轨</span>
+                    <span class="indicator-value" id="bollingerLower">--</span>
+                </div>
+                <div class="indicator-item">
+                    <span class="indicator-label">KDJ-K</span>
+                    <span class="indicator-value" id="kdjK">--</span>
+                </div>
+                <div class="indicator-item">
+                    <span class="indicator-label">KDJ-D</span>
+                    <span class="indicator-value" id="kdjD">--</span>
+                </div>
+                <div class="indicator-item">
+                    <span class="indicator-label">KDJ-J</span>
+                    <span class="indicator-value" id="kdjJ">--</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="/static/js/kline.js"></script>
+</body>
+</html>

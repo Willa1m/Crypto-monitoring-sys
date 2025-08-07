@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加密货币价格监控系统 - 以太坊详情</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 导航菜单 -->
+        <nav class="nav-menu">
+            <a href="/" class="nav-item">首页</a>
+            <a href="/bitcoin" class="nav-item">
+                <img src="/static/icons/bitcoin.svg" alt="Bitcoin" class="crypto-icon">
+                比特币详情
+            </a>
+            <a href="/ethereum" class="nav-item active">
+                <img src="/static/icons/ethereum.svg" alt="Ethereum" class="crypto-icon">
+                以太坊详情
+            </a>
+            <a href="/kline" class="nav-item">
+                📊 K线图分析
+            </a>
+        </nav>
+
+        <!-- 头部 -->
+        <header class="header">
+            <h1>
+                <img src="/static/icons/ethereum.svg" alt="Ethereum" class="crypto-icon-large">
+                以太坊价格详情
+            </h1>
+            <div class="refresh-container">
+                <button class="refresh-btn" onclick="refreshData()">🔄 刷新数据</button>
+                <div class="status-bar">
+                    <div id="statusIndicator" class="status-indicator"></div>
+                    <span id="statusText">系统就绪</span>
+                </div>
+                <div class="last-update">
+                    最后更新: <span id="lastUpdate">--</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 以太坊价格面板 -->
+        <div class="crypto-panel">
+            <div id="ethPriceContainer" class="price-container">
+                <div class="panel-title">📊 当前价格</div>
+                <div id="ethPrice" class="loading-placeholder">加载中...</div>
+            </div>
+        </div>
+
+        <!-- 时间切换控制 -->
+        <div class="timeframe-control">
+            <h3>⏰ 时间粒度选择</h3>
+            <div class="timeframe-buttons">
+                <button class="timeframe-btn" onclick="changeTimeframe('minute')" data-timeframe="minute">分钟级</button>
+                <button class="timeframe-btn active" onclick="changeTimeframe('hour')" data-timeframe="hour">小时级</button>
+                <button class="timeframe-btn" onclick="changeTimeframe('day')" data-timeframe="day">天级</button>
+            </div>
+        </div>
+
+        <!-- 图表面板 - 三条曲线 -->
+        <div class="charts-panel">
+            <div class="panel-title">📈 以太坊数据分析</div>
+            
+            <!-- 价格走势图表 -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3><span class="chart-icon">💰</span><span class="chart-title-text">价格走势</span></h3>
+                    <div class="chart-info">显示开盘价、最高价、最低价、收盘价</div>
+                </div>
+                <div class="chart-body">
+                    <canvas id="priceChart" width="800" height="400"></canvas>
+                </div>
+            </div>
+            
+            <!-- 成交量图表 -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3><span class="chart-icon">📊</span><span class="chart-title-text">成交量</span></h3>
+                    <div class="chart-info">显示交易量变化趋势</div>
+                </div>
+                <div class="chart-body">
+                    <canvas id="volumeChart" width="800" height="400"></canvas>
+                </div>
+            </div>
+            
+            <!-- 波动率图表 -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3><span class="chart-icon">📉</span><span class="chart-title-text">价格波动率</span></h3>
+                    <div class="chart-info">显示价格波动程度（基于10期移动标准差）</div>
+                </div>
+                <div class="chart-body">
+                    <canvas id="volatilityChart" width="800" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src="{{ url_for('static', filename='js/ethereum.js') }}"></script>
+</body>
+</html>

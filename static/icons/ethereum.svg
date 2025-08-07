@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 以太坊图标 -->
+  <g transform="translate(100, 100) scale(1.2)">
+    <!-- 上半部分 -->
+    <polygon points="0,-60 -30,0 0,20 30,0" fill="#8a92b2" />
+    <!-- 下半部分 -->
+    <polygon points="0,20 -30,0 0,60 30,0" fill="#62688f" />
+    <!-- 中间白色分割线 -->
+    <polygon points="-30,0 0,20 30,0 0,-60" fill="#454a75" opacity="0.6" />
+    <polygon points="-30,0 0,20 30,0 0,60" fill="#454a75" opacity="0.6" />
+    <polygon points="-30,0 0,20 30,0" fill="white" opacity="0.2" />
+  </g>
+</svg>

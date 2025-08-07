@@ -1,0 +1,119 @@
+{
+  "generated_at": "2025-08-05T12:27:39.533465",
+  "latest_prices": [
+    {
+      "name": "Ethereum",
+      "symbol": "ETH",
+      "price": 3659.36702823973,
+      "change_24h": -1.66217012351692,
+      "timestamp": "2025-08-05T12:26:20"
+    },
+    {
+      "name": "Bitcoin",
+      "symbol": "BTC",
+      "price": 114269.886021187,
+      "change_24h": -0.692982041016653,
+      "timestamp": "2025-08-05T12:25:58"
+    }
+  ],
+  "statistics": {
+    "minute": {
+      "BTC": {
+        "symbol": "BTC",
+        "timeframe": "minute",
+        "current_price": 114246.575964895,
+        "highest_price": 114820.790455716,
+        "lowest_price": 114215.101051679,
+        "average_price": 114412.16410950094,
+        "price_change": -424.48371502099326,
+        "price_change_percent": -0.3701751045171009,
+        "volatility": 167.76581985908658,
+        "total_volume": 10252.078420012982,
+        "data_points": 100
+      },
+      "ETH": {
+        "symbol": "ETH",
+        "timeframe": "minute",
+        "current_price": 3656.81958852374,
+        "highest_price": 3683.33691897727,
+        "lowest_price": 3646.44515940349,
+        "average_price": 3661.522365187693,
+        "price_change": -19.73739289092009,
+        "price_change_percent": -0.5368444713544362,
+        "volatility": 9.814474941706122,
+        "total_volume": 268835.0258542968,
+        "data_points": 100
+      }
+    },
+    "hour": {
+      "BTC": {
+        "symbol": "BTC",
+        "timeframe": "hour",
+        "current_price": 114240.590664058,
+        "highest_price": 116045.307152744,
+        "lowest_price": 112007.360573093,
+        "average_price": 114206.92339356258,
+        "price_change": -1081.6263717399997,
+        "price_change_percent": -0.9379167341226569,
+        "volatility": 813.4332574857692,
+        "total_volume": 652744.3871409514,
+        "data_points": 100
+      },
+      "ETH": {
+        "symbol": "ETH",
+        "timeframe": "hour",
+        "current_price": 3656.45406154051,
+        "highest_price": 3736.55378609266,
+        "lowest_price": 3359.4397452912,
+        "average_price": 3547.8348869963,
+        "price_change": -32.83163237751023,
+        "price_change_percent": -0.8899184043034358,
+        "volatility": 91.33280120364289,
+        "total_volume": 18942789.11681714,
+        "data_points": 100
+      }
+    },
+    "day": {
+      "BTC": {
+        "symbol": "BTC",
+        "timeframe": "day",
+        "current_price": 114242.808599922,
+        "highest_price": 123089.405261393,
+        "lowest_price": 92881.6022959703,
+        "average_price": 108173.39788977728,
+        "price_change": 19203.03505101241,
+        "price_change_percent": 20.205261790875472,
+        "volatility": 6762.684000028261,
+        "total_volume": 17948045.748943657,
+        "data_points": 100
+      },
+      "ETH": {
+        "symbol": "ETH",
+        "timeframe": "day",
+        "current_price": 3656.41949609764,
+        "highest_price": 3938.77638355847,
+        "lowest_price": 1735.49122896352,
+        "average_price": 2724.5750867881643,
+        "price_change": 1856.2291570300702,
+        "price_change_percent": 103.11293849024467,
+        "volatility": 554.6484007292047,
+        "total_volume": 498466339.19718903,
+        "data_points": 100
+      }
+    }
+  },
+  "charts": {
+    "minute": {
+      "price_chart": "price_chart_minute.png",
+      "comparison_chart": "comparison_chart_minute.png"
+    },
+    "hour": {
+      "price_chart": "price_chart_hour.png",
+      "comparison_chart": "comparison_chart_hour.png"
+    },
+    "day": {
+      "price_chart": "price_chart_day.png",
+      "comparison_chart": "comparison_chart_day.png"
+    }
+  }
+}
