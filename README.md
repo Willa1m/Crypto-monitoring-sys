@@ -1,5 +1,8 @@
 # 🚀 加密货币监控系统 | Cryptocurrency Monitoring System
 
+> **Archived version.** This is an earlier iteration of the BTC/ETH monitoring prototype. The maintained version is [crypto-monitoring-plus](https://github.com/Willa1m/crypto-monitoring-plus).
+> 这是行情监控原型的早期版本，后续版本见 [crypto-monitoring-plus](https://github.com/Willa1m/crypto-monitoring-plus)。
+
 [中文](#中文文档) | [English](#english-documentation)
 
 <a name="中文文档"></a>
